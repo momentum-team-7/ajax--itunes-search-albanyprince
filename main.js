@@ -8,18 +8,18 @@ searchMusic.addEventListener('submit', event => {
         
         // let newArtist = document.querySelector('.search-artist').value
         // console.log('search request function called', newArtist)
-        // clearResults()
+        clearResults()
         searchRequest()
 
         
 }) 
-// function clearResults() {
-//     let songs = document.querySelector("#display-results")
-//         for (let song of songs) {
-//             song.remove();
-//         }
+function clearResults() {
+    let songs = document.querySelectorAll(".    results")
+        for (let song of songs) {
+            song.remove();
+        }
 
-
+    }
 //request the artist
 function searchRequest() {
     let newArtist = document.querySelector('.search-artist').value
@@ -47,6 +47,7 @@ let resultsEl = document.createElement('div')
 let coverArt = document.createElement('img')
     coverArt.className = "cover-image"
     coverArt.src = song.artworkUrl100
+// addEvent listener to img element; use a click; put a data attribute on the button..
 
 let artistName = document.createElement('h2')
     artistName.className = "artist"
@@ -67,9 +68,4 @@ let trackCensoredName = document.createElement('h2')
     resultsEl.appendChild(trackCensoredName)
     
 }    
-//  function clearBar(target) {
-//     if(target.value ==`${url}+${newArtist}`) {
-//         target.value = "";}
-//     }
-
 
