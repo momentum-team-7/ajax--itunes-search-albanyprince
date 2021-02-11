@@ -61,7 +61,7 @@ header {
    
 }
 
-.display-results {
+.display-results { 
     box-sizing: border-box;
     width: 80%;
     border: 5px;
@@ -80,7 +80,6 @@ header {
     max-width: 100px;
     overflow: hidden;
 }
-
 
 
 .play-button {

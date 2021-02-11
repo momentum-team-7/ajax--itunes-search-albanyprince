@@ -37,6 +37,7 @@ fetch(`${url}+${newArtist}`) //+ "&limit=16"
         renderResults(song)
     })
    
+   
 }
 // results I want displayed: artistName, collectionName, trackCensoredName
 // create div(s) for where results will be displayed
@@ -66,9 +67,7 @@ let trackCensoredName = document.createElement('p')
     trackCensoredName.className = "track"
     trackCensoredName.innerText = song.trackCensoredName   
     
-let albumArt = document.createElement('img')
-    albumArt.className = "album-art"
-    albumArt.src = song.artworkUrl60  
+
 
     resultsContainer.appendChild(resultsEl)
     resultsEl.appendChild(coverArt)
@@ -79,6 +78,15 @@ let albumArt = document.createElement('img')
     playButton.addEventListener ('click', e => {
         console.log(song.previewUrl)
         previewMusic.src = song.previewUrl
+        showArtwork(song)
     })
-}    
 
+}    
+function showArtwork(song) {
+    let artWork = document.querySelector('.album-artwork')
+    let albumArt = document.createElement('img')
+    albumArt.className = "album-art"
+    albumArt.src = song.artworkUrl100   
+    artWork.appendChild(albumArt)
+
+}
