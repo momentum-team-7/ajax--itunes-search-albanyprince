@@ -1,6 +1,8 @@
-const url ='https://proxy-itunes-api.glitch.me/search?term='
+const url ='https://itunes.apple.com/search?term='
 const resultsContainer = document.querySelector(".display-results")
+const previewContainer = document.querySelector('.music-player')
 let searchMusic = document.querySelector('.music-search')
+let previewMusic = document.querySelector('.play-audio')
 
 //event listeners.
 searchMusic.addEventListener('submit', event => { 
@@ -9,22 +11,22 @@ searchMusic.addEventListener('submit', event => {
         // let newArtist = document.querySelector('.search-artist').value
         // console.log('search request function called', newArtist)
         clearResults()
-        searchRequest()
-
-        
+        searchRequest()        
 }) 
+
+// previewMusic.addEventListener()
 function clearResults() {
-    let songs = document.querySelectorAll(".    results")
+    let songs = document.querySelectorAll(".results")
         for (let song of songs) {
             song.remove();
         }
 
     }
-//request the artist
+//make search request
 function searchRequest() {
     let newArtist = document.querySelector('.search-artist').value
         console.log('search request function called', newArtist)
-fetch(`${url}+${newArtist}`)
+fetch(`${url}+${newArtist}`) //+ "&limit=16"
         .then(function (response){
         return response.json()
 
@@ -40,32 +42,43 @@ fetch(`${url}+${newArtist}`)
 // create div(s) for where results will be displayed
 
 function renderResults(song) {
-//     let resultsEl = document.createElement('div)
+let playButton = document.createElement('button')
+    playButton.className = "play-button"
+    playButton.innerText = "play"
+
+
 let resultsEl = document.createElement('div')
     resultsEl.className = "results"
 
 let coverArt = document.createElement('img')
     coverArt.className = "cover-image"
     coverArt.src = song.artworkUrl100
-// addEvent listener to img element; use a click; put a data attribute on the button..
 
-let artistName = document.createElement('h2')
+let artistName = document.createElement('p')
     artistName.className = "artist"
     artistName.innerText = song.artistName
 
- let collectionName = document.createElement('h2')
+ let collectionName = document.createElement('p')
     collectionName.className = "album"
     collectionName.innerText = song.collectionName
     
-let trackCensoredName = document.createElement('h2')
+let trackCensoredName = document.createElement('p')
     trackCensoredName.className = "track"
-    trackCensoredName.innerText = song.trackCensoredName    
+    trackCensoredName.innerText = song.trackCensoredName   
+    
+let albumArt = document.createElement('img')
+    albumArt.className = "album-art"
+    albumArt.src = song.artworkUrl60  
 
     resultsContainer.appendChild(resultsEl)
-
     resultsEl.appendChild(coverArt)
     resultsEl.appendChild(artistName)
     resultsEl.appendChild(trackCensoredName)
+    resultsEl.appendChild(playButton)
     
+    playButton.addEventListener ('click', e => {
+        console.log(song.previewUrl)
+        previewMusic.src = song.previewUrl
+    })
 }    
 
